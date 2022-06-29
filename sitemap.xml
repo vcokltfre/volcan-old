@@ -16,7 +16,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://volcan.vco.sh/config/</loc>
+         <lastmod>2022-06-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://volcan.vco.sh/setup/</loc>
+         <lastmod>2022-06-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://volcan.vco.sh/setup/compose/</loc>
+         <lastmod>2022-06-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://volcan.vco.sh/setup/manual/</loc>
          <lastmod>2022-06-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
