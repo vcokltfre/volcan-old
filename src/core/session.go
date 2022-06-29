@@ -5,9 +5,11 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/sirupsen/logrus"
+	"github.com/vcokltfre/volcan/src/commands"
 )
 
 var Session *discordgo.Session
+var handler *commands.CommandHandler
 
 func SetupSession() error {
 	sess, err := discordgo.New("Bot " + os.Getenv("TOKEN"))
@@ -22,6 +24,11 @@ func SetupSession() error {
 	logrus.Info("Connecting to the Discord gateway...")
 
 	err = sess.Open()
+	if err != nil {
+		return err
+	}
+
+	err = setupEventListeners()
 	if err != nil {
 		return err
 	}
