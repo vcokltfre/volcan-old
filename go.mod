@@ -6,6 +6,7 @@ require (
 	github.com/bwmarrin/discordgo v0.25.0
 	github.com/joho/godotenv v1.4.0
 	github.com/sirupsen/logrus v1.4.2
+	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
 	gorm.io/driver/mysql v1.3.4
 	gorm.io/driver/postgres v1.3.7
 	gorm.io/gorm v1.23.6

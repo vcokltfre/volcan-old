@@ -17,9 +17,11 @@ func SetupSession() error {
 		return err
 	}
 
+	Session = sess
+
 	// We make use of all intents at various stages of moderation
 	// so it's not a sin to use them all here.
-	sess.Identify.Intents = discordgo.IntentsAll
+	Session.Identify.Intents = discordgo.IntentsAll
 
 	logrus.Info("Connecting to the Discord gateway...")
 
@@ -34,8 +36,6 @@ func SetupSession() error {
 	}
 
 	logrus.Info("Successfully connected to the Discord gateway.")
-
-	Session = sess
 
 	return nil
 }
