@@ -3,6 +3,7 @@ module github.com/vcokltfre/volcan
 go 1.18
 
 require (
+	github.com/bwmarrin/discordgo v0.25.0
 	github.com/joho/godotenv v1.4.0
 	github.com/sirupsen/logrus v1.4.2
 	gorm.io/driver/mysql v1.3.4
@@ -12,6 +13,7 @@ require (
 
 require (
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
+	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.12.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
