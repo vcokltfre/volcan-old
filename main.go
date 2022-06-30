@@ -6,6 +6,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
+	"github.com/vcokltfre/volcan/src/api"
 	"github.com/vcokltfre/volcan/src/commands"
 	"github.com/vcokltfre/volcan/src/config"
 	"github.com/vcokltfre/volcan/src/core"
@@ -49,6 +50,8 @@ func main() {
 
 	defer logrus.Info("Shutdown complete.")
 	defer core.Session.Close()
+
+	api.StartAPI()
 
 	exit := make(chan os.Signal, 1)
 	signal.Notify(exit, os.Interrupt)

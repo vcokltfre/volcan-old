@@ -10,7 +10,7 @@ import (
 	"github.com/vcokltfre/volcan/src/database"
 )
 
-type CaseManager struct {}
+type CaseManager struct{}
 
 func resolveMember(userID string) (*discordgo.Member, error) {
 	member, err := core.Session.GuildMember(config.Config.GetPrimaryGuild(), userID)
@@ -51,8 +51,33 @@ func notifyMember(member *discordgo.Member, reason string) {
 	}
 }
 
-func (m *CaseManager) CreateCase(userID, userName, modID, modName, typ, reason string, expires int64) (*database.Case, error) {
-	db_case := &database.Case{
+func (m *CaseManager) GetCase(caseID int) (*database.Case, error) {
+	dbCase := &database.Case{}
+	err := database.DB.Where("id = ?", caseID).First(dbCase).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return dbCase, nil
+}
+
+func (m *CaseManager) CreateCase(userID, userName, modID, modName, typ, reason, muteType, metadata string, expires int64, notified bool) (*database.Case, error) {
+	if userName == "" || modName == "" {
+		member, mod, err := resolveCaseContext(userID, modID)
+		if err != nil {
+			return nil, err
+		}
+
+		if userName == "" {
+			userName = member.User.Username
+		}
+
+		if modName == "" {
+			modName = mod.User.Username
+		}
+	}
+
+	dbCase := &database.Case{
 		UserID:    userID,
 		UserName:  userName,
 		ModID:     modID,
@@ -61,17 +86,20 @@ func (m *CaseManager) CreateCase(userID, userName, modID, modName, typ, reason s
 		Reason:    reason,
 		CreatedAt: time.Now().Unix(),
 		ExpiresAt: expires,
+		Notified:  notified,
+		MuteType:  muteType,
+		Metadata:  metadata,
 	}
 
-	err := database.DB.Create(db_case).Error
+	err := database.DB.Create(dbCase).Error
 	if err != nil {
 		return nil, err
 	}
 
-	return db_case, nil
+	return dbCase, nil
 }
 
-func (m *CaseManager) WarnUser(userID string, modID string, reason string, notify bool) (*database.Case, error) {
+func (m *CaseManager) WarnUser(userID string, modID string, reason string, notify bool, metadata string) (*database.Case, error) {
 	member, mod, err := resolveCaseContext(userID, modID)
 	if err != nil {
 		return nil, err
@@ -81,5 +109,5 @@ func (m *CaseManager) WarnUser(userID string, modID string, reason string, notif
 		notifyMember(member, reason)
 	}
 
-	return m.CreateCase(userID, member.User.Username, modID, mod.User.Username, database.CaseWarn, reason, 0)
+	return m.CreateCase(userID, member.User.Username, modID, mod.User.Username, database.CaseWarn, reason, "", metadata, 0, notify)
 }
