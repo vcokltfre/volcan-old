@@ -5,6 +5,8 @@ import (
 	"strconv"
 )
 
+type Validator func(string) error
+
 func ValidateInt(lower, upper int) Validator {
 	return func(str string) error {
 		i, err := strconv.Atoi(str)

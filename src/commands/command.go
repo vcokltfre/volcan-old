@@ -10,8 +10,6 @@ type CallbackFunction func(*Context) error
 
 type CheckFunction func(*Context) error
 
-type Validator func(string) error
-
 type Command struct {
 	Name        string
 	Description string
