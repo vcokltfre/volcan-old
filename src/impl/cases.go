@@ -99,7 +99,7 @@ func (m *CaseManager) CreateCase(userID, userName, modID, modName, typ, reason, 
 	return dbCase, nil
 }
 
-func (m *CaseManager) WarnUser(userID string, modID string, reason string, notify bool, metadata string) (*database.Case, error) {
+func (m *CaseManager) WarnUser(userID, modID, reason string, notify bool, metadata string) (*database.Case, error) {
 	member, mod, err := resolveCaseContext(userID, modID)
 	if err != nil {
 		return nil, err
