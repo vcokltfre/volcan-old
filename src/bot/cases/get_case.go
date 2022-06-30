@@ -13,7 +13,7 @@ var getCase = &commands.Command{
 	Args: []commands.Arg{
 		{
 			Name:      "id",
-			Validator: commands.Validator(commands.ValidateInt(0, 9999999)),
+			Validator: commands.ValidateInt(0, 9999999),
 			Required:  true,
 		},
 	},
