@@ -10,6 +10,7 @@ import (
 	"github.com/vcokltfre/volcan/src/config"
 	"github.com/vcokltfre/volcan/src/core"
 	"github.com/vcokltfre/volcan/src/database"
+	"github.com/vcokltfre/volcan/src/impl"
 )
 
 func init() {
@@ -37,6 +38,11 @@ func main() {
 	}
 
 	err = commands.Setup()
+	if err != nil {
+		logrus.Fatal(err)
+	}
+
+	err = impl.SetupVolcan()
 	if err != nil {
 		logrus.Fatal(err)
 	}

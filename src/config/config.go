@@ -57,3 +57,13 @@ func (c *BotConfig) GetLevel(member discordgo.Member) int {
 
 	return level
 }
+
+func (c *BotConfig) GetPrimaryGuild() string {
+	for id, guild := range c.Guilds {
+		if guild.Primary {
+			return id
+		}
+	}
+
+	panic("No primary guild set!")
+}

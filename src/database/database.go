@@ -35,7 +35,9 @@ func SetupDB() error {
 
 	logrus.Info("Connected to the database, running migrations...")
 
-	err = db.AutoMigrate()
+	err = db.AutoMigrate(
+		&Case{},
+	)
 	if err != nil {
 		return err
 	}
