@@ -7,6 +7,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/vcokltfre/volcan/src/api"
+	"github.com/vcokltfre/volcan/src/bot"
 	"github.com/vcokltfre/volcan/src/commands"
 	"github.com/vcokltfre/volcan/src/config"
 	"github.com/vcokltfre/volcan/src/core"
@@ -39,6 +40,11 @@ func main() {
 	}
 
 	err = commands.Setup()
+	if err != nil {
+		logrus.Fatal(err)
+	}
+
+	err = bot.RegisterCommands()
 	if err != nil {
 		logrus.Fatal(err)
 	}

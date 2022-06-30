@@ -69,11 +69,11 @@ func (m *CaseManager) CreateCase(userID, userName, modID, modName, typ, reason, 
 		}
 
 		if userName == "" {
-			userName = member.User.Username
+			userName = member.User.Username + "#" + member.User.Discriminator
 		}
 
 		if modName == "" {
-			modName = mod.User.Username
+			modName = mod.User.Username + "#" + mod.User.Discriminator
 		}
 	}
 

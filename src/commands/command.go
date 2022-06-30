@@ -13,13 +13,14 @@ type CheckFunction func(*Context) error
 type Validator func(string) error
 
 type Command struct {
-	Name      string
-	Aliases   []string
-	Args      []Arg
-	Flags     []Flag
-	BoolFlags []BoolFlag
-	Callback  CallbackFunction
-	Checks    []CheckFunction
+	Name        string
+	Description string
+	Aliases     []string
+	Args        []Arg
+	Flags       []Flag
+	BoolFlags   []BoolFlag
+	Callback    CallbackFunction
+	Checks      []CheckFunction
 }
 
 type Arg struct {

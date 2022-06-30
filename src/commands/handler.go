@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
@@ -31,6 +32,15 @@ func Setup() error {
 	return setupEventListeners()
 }
 
+func (h *CommandHandler) Register(command *Command) error {
+	if h.Commands[command.Name] != nil {
+		return fmt.Errorf("Command %s is already defined.", command.Name)
+	}
+
+	h.Commands[command.Name] = command
+	return nil
+}
+
 func (h *CommandHandler) ProcessMessage(message *discordgo.MessageCreate) error {
 	if !utils.Contains(h.guilds, message.GuildID) {
 		return nil
@@ -59,7 +69,7 @@ func (h *CommandHandler) ProcessMessage(message *discordgo.MessageCreate) error 
 		return err
 	}
 
-	ctx, err := ConstructContext(parts[1:], command)
+	ctx, err := ConstructContext(parts[1:], command, message)
 	if err != nil {
 		core.Session.ChannelMessageSend(message.ChannelID, err.Error())
 		return err
