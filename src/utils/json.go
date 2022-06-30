@@ -22,3 +22,12 @@ func DecodeAndValidate(reader io.ReadCloser, obj any) error {
 
 	return Validator.Struct(obj)
 }
+
+func Prettify(obj any) (string, error) {
+	data, err := json.MarshalIndent(obj, "", "  ")
+	if err != nil {
+		return "", err
+	}
+
+	return "```json\n" + string(data) + "\n```", nil
+}

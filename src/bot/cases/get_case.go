@@ -1,10 +1,9 @@
 package cases_cmd
 
 import (
-	"encoding/json"
-
 	"github.com/vcokltfre/volcan/src/commands"
 	"github.com/vcokltfre/volcan/src/impl"
+	"github.com/vcokltfre/volcan/src/utils"
 )
 
 var getCase = &commands.Command{
@@ -31,12 +30,12 @@ var getCase = &commands.Command{
 		}
 
 		if ctx.BoolFlags["json"] {
-			data, err := json.MarshalIndent(dbCase, "", "  ")
+			data, err := utils.Prettify(dbCase)
 			if err != nil {
 				return err
 			}
 
-			_, err = ctx.Send("```json\n" + string(data) + "\n```")
+			_, err = ctx.Send(data)
 			return err
 		}
 
