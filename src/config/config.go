@@ -18,8 +18,9 @@ func LoadConfig() error {
 }
 
 type Guild struct {
-	Name   string `yaml:"name"`
-	Prefix string `yaml:"prefix"`
+	Name    string `yaml:"name"`
+	Prefix  string `yaml:"prefix"`
+	Primary bool   `yaml:"primary"`
 }
 
 type BotConfig struct {
