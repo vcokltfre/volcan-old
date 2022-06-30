@@ -10,9 +10,7 @@ import (
 	"github.com/vcokltfre/volcan/src/database"
 )
 
-type CaseManager struct {
-	nextId int
-}
+type CaseManager struct {}
 
 func resolveMember(userID string) (*discordgo.Member, error) {
 	member, err := core.Session.GuildMember(config.Config.GetPrimaryGuild(), userID)

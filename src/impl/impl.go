@@ -12,6 +12,7 @@ func SetupVolcan() error {
 	}
 
 	Error = &ErrorHandler{}
+	Logger = &VolcanLogger{}
 
 	return nil
 }
