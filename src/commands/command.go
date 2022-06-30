@@ -51,6 +51,8 @@ func (c *Command) Validate() error {
 		argNames = append(argNames, arg.Name)
 	}
 
+	// TODO: ensure no optional args follow required args
+
 	for _, flag := range c.Flags {
 		if utils.Contains(flagNames, flag.Name) {
 			return fmt.Errorf("Flag %s is already defined for command %s.", flag.Name, c.Name)
@@ -86,6 +88,8 @@ func (c *Command) Validate() error {
 	return nil
 }
 
+// Given a flag name this will return it's unaliased name
+// and whether or not it is a boolean flag.
 func (c *Command) getCanonicalFlagName(name string) (string, bool) {
 	for _, flag := range c.Flags {
 		if flag.Name == name || utils.Contains(flag.Aliases, name) {
