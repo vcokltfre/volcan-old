@@ -2,7 +2,9 @@ package commands
 
 import (
 	"fmt"
+	"strings"
 
+	"github.com/vcokltfre/volcan/src/core"
 	"github.com/vcokltfre/volcan/src/utils"
 )
 
@@ -22,20 +24,25 @@ type Command struct {
 }
 
 type Arg struct {
-	Name      string
-	Validator Validator
-	Required  bool
+	Name        string
+	Type        string
+	Description string
+	Validator   Validator
+	Required    bool
 }
 
 type Flag struct {
-	Name      string
-	Aliases   []string
-	Validator Validator
+	Name        string
+	Type        string
+	Description string
+	Aliases     []string
+	Validator   Validator
 }
 
 type BoolFlag struct {
-	Name    string
-	Aliases []string
+	Name        string
+	Description string
+	Aliases     []string
 }
 
 func (c *Command) Validate() error {
@@ -103,4 +110,38 @@ func (c *Command) getCanonicalFlagName(name string) (string, bool) {
 	}
 
 	return "", false
+}
+
+func (c *Command) sendHelp(channelID string) error {
+	usage := c.Name
+	argHelp := []string{}
+
+	for _, arg := range c.Args {
+		if arg.Required {
+			usage += fmt.Sprintf(" <%s:%s>", arg.Name, arg.Type)
+		} else {
+			usage += fmt.Sprintf(" [%s:%s]", arg.Name, arg.Type)
+		}
+
+		argHelp = append(argHelp, fmt.Sprintf("(`%s`) `%s`: %s", arg.Type, arg.Name, arg.Description))
+	}
+
+	argHelp = append(argHelp, "")
+
+	for _, flag := range c.Flags {
+		usage += fmt.Sprintf(" [--%s=%s]", flag.Name, flag.Type)
+		argHelp = append(argHelp, fmt.Sprintf("(`%s`) `--%s`: %s", flag.Type, flag.Name, flag.Description))
+	}
+
+	for _, flag := range c.BoolFlags {
+		usage += fmt.Sprintf(" [--%s]", flag.Name)
+		argHelp = append(argHelp, fmt.Sprintf("(`bool`) `--%s`: %s", flag.Name, flag.Description))
+	}
+
+	commandHelp := fmt.Sprintf("**%s** - *%s*\n\nUsage: `%s`\n\n", c.Name, c.Description, usage)
+
+	commandHelp += strings.Join(argHelp, "\n")
+
+	_, err := core.Session.ChannelMessageSend(channelID, commandHelp)
+	return err
 }

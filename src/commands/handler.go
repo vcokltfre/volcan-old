@@ -69,6 +69,10 @@ func (h *CommandHandler) ProcessMessage(message *discordgo.MessageCreate) error 
 		return err
 	}
 
+	if len(parts) == 2 && parts[1] == "--help" {
+		return command.sendHelp(message.ChannelID)
+	}
+
 	ctx, err := ConstructContext(parts[1:], command, message)
 	if err != nil {
 		core.Session.ChannelMessageSend(message.ChannelID, err.Error())

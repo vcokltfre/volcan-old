@@ -11,15 +11,18 @@ var getCase = &commands.Command{
 	Description: "Get a case by ID",
 	Args: []commands.Arg{
 		{
-			Name:      "id",
-			Validator: commands.ValidateInt(0, 9999999),
-			Required:  true,
+			Name:        "id",
+			Type:        "number",
+			Description: "The ID of the case to get.",
+			Validator:   commands.ValidateInt(0, 9999999),
+			Required:    true,
 		},
 	},
 	BoolFlags: []commands.BoolFlag{
 		{
-			Name:    "json",
-			Aliases: []string{"j"},
+			Name:        "json",
+			Description: "Output in JSON format.",
+			Aliases:     []string{"j"},
 		},
 	},
 	Callback: func(ctx *commands.Context) error {
