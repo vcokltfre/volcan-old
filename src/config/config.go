@@ -19,10 +19,9 @@ func LoadConfig() error {
 
 type Guild struct {
 	Name   string `yaml:"name"`
-	Id     string `yaml:"id"`
 	Prefix string `yaml:"prefix"`
 }
 
 type BotConfig struct {
-	Guilds []Guild `yaml:"guilds"`
+	Guilds map[string]Guild `yaml:"guilds"`
 }

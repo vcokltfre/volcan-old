@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"os/signal"
 
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
+	"github.com/vcokltfre/volcan/src/commands"
 	"github.com/vcokltfre/volcan/src/config"
 	"github.com/vcokltfre/volcan/src/core"
 	"github.com/vcokltfre/volcan/src/database"
@@ -31,9 +31,12 @@ func main() {
 		logrus.Fatal(err)
 	}
 
-	fmt.Println(config.Config)
-
 	err = core.SetupSession()
+	if err != nil {
+		logrus.Fatal(err)
+	}
+
+	err = commands.Setup()
 	if err != nil {
 		logrus.Fatal(err)
 	}
