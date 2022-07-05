@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://volcan.vco.sh/</loc>
-         <lastmod>2022-06-30</lastmod>
+         <lastmod>2022-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://volcan.vco.sh/API/</loc>
-         <lastmod>2022-06-30</lastmod>
+         <lastmod>2022-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://volcan.vco.sh/commands/</loc>
-         <lastmod>2022-06-30</lastmod>
+         <lastmod>2022-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://volcan.vco.sh/config/</loc>
-         <lastmod>2022-06-30</lastmod>
+         <lastmod>2022-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://volcan.vco.sh/setup/</loc>
-         <lastmod>2022-06-30</lastmod>
+         <lastmod>2022-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://volcan.vco.sh/setup/compose/</loc>
-         <lastmod>2022-06-30</lastmod>
+         <lastmod>2022-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://volcan.vco.sh/setup/manual/</loc>
-         <lastmod>2022-06-30</lastmod>
+         <lastmod>2022-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
