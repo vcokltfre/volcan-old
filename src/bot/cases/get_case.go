@@ -33,7 +33,7 @@ var getCase = &commands.Command{
 		}
 
 		if ctx.BoolFlags["json"] {
-			data, err := utils.Prettify(dbCase)
+			data, err := utils.PrettifyJSON(dbCase)
 			if err != nil {
 				return err
 			}
