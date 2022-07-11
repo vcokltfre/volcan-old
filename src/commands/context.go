@@ -184,8 +184,8 @@ func (c *Context) Int(name string) (int, error) {
 	return i, nil
 }
 
-func (c *Context) Send(data string) (*discordgo.Message, error) {
-	return core.Session.ChannelMessageSend(c.ChannelID, data)
+func (c *Context) Send(content string) (*discordgo.Message, error) {
+	return core.Session.ChannelMessageSend(c.ChannelID, content)
 }
 
 func (c *Context) SendEmbed(embed *discordgo.MessageEmbed) (*discordgo.Message, error) {
