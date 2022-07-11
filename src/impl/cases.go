@@ -13,7 +13,7 @@ import (
 type CaseManager struct{}
 
 func resolveMember(userID string) (*discordgo.Member, error) {
-	member, err := core.Session.GuildMember(config.Config.GetPrimaryGuild(), userID)
+	member, err := core.Session.GuildMember(config.Config.PrimaryGuild, userID)
 	if err != nil {
 		return nil, err
 	}

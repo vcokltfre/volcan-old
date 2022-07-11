@@ -32,7 +32,7 @@ func Setup() error {
 	return setupEventListeners()
 }
 
-func (h *CommandHandler) Register(commands... *Command) error {
+func (h *CommandHandler) Register(commands ...*Command) error {
 	for _, command := range commands {
 		if h.Commands[command.Name] != nil {
 			return fmt.Errorf("Command %s is already defined.", command.Name)

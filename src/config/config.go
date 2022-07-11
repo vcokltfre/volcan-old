@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/bwmarrin/discordgo"
@@ -15,7 +16,12 @@ func LoadConfig() error {
 		return err
 	}
 
-	return yaml.Unmarshal(data, &Config)
+	err = yaml.Unmarshal(data, &Config)
+	if err != nil {
+		return err
+	}
+
+	return Config.Validate()
 }
 
 type Guild struct {
@@ -25,8 +31,9 @@ type Guild struct {
 }
 
 type BotConfig struct {
-	Guilds map[string]Guild `yaml:"guilds"`
-	Levels map[string]int   `yaml:"levels"`
+	Guilds       map[string]Guild `yaml:"guilds"`
+	Levels       map[string]int   `yaml:"levels"`
+	PrimaryGuild string
 }
 
 // Get the permission level of a member.
@@ -58,12 +65,19 @@ func (c *BotConfig) GetLevel(member discordgo.Member) int {
 	return level
 }
 
-func (c *BotConfig) GetPrimaryGuild() string {
+func (c *BotConfig) Validate() error {
+	primaryGuilds := 0
+
 	for id, guild := range c.Guilds {
 		if guild.Primary {
-			return id
+			primaryGuilds++
+			c.PrimaryGuild = id
 		}
 	}
 
-	panic("No primary guild set!")
+	if primaryGuilds != 1 {
+		return fmt.Errorf("There must be exactly one primary guild.")
+	}
+
+	return nil
 }

@@ -21,15 +21,17 @@ func init() {
 	logrus.SetFormatter(&logrus.TextFormatter{
 		FullTimestamp: true,
 	})
-}
 
-func main() {
-	err := database.SetupDB()
+	err := config.LoadConfig()
 	if err != nil {
 		logrus.Fatal(err)
 	}
 
-	err = config.LoadConfig()
+	logrus.Info("Config loaded successfully.")
+}
+
+func main() {
+	err := database.SetupDB()
 	if err != nil {
 		logrus.Fatal(err)
 	}
